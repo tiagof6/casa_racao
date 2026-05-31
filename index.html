@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="THÉO DOG RAÇÕES - A casa de ração preferida do seu pet em Jacareí. Compre rações premium, petiscos e acessórios com entrega rápida e pedido fácil pelo WhatsApp.">
+  
+  <title>Théo Dog Rações - A Casa de Ração do Seu Pet</title>
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Aviso Superior (Promoções) -->
+  <div class="promo-bar" id="promoBar">
+    <p><i class="fa-solid fa-truck-fast"></i> Entrega grátis para Jacareí nas compras acima de R$ 100! <i class="fa-solid fa-paw"></i></p>
+  </div>
+
+  <!-- Cabeçalho Principal (Header) -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      
+      <!-- Logo da Loja -->
+      <a href="#" class="logo-area" id="logoLink">
+        <div class="logo-icon-wrapper">
+          <i class="fa-solid fa-dog logo-paw-icon"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">THÉO DOG</span>
+          <span class="logo-subtitle">RAÇÕES & PET</span>
+        </div>
+      </a>
+
+      <!-- Barra de Busca -->
+      <div class="search-bar-wrapper">
+        <form class="search-form" id="searchForm" onsubmit="event.preventDefault();">
+          <div class="search-input-group">
+            <input type="text" id="searchInput" placeholder="O que seu pet precisa hoje?" autocomplete="off" aria-label="Buscar produtos">
+            <button type="submit" id="searchSubmitBtn" aria-label="Buscar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <!-- Resultados da busca rápida -->
+          <div class="quick-search-results" id="quickSearchResults"></div>
+        </form>
+      </div>
+
+      <!-- Menu de Ações (Perfil, Carrinho) -->
+      <div class="header-actions">
+        <!-- Contato Rápido (Desktop) -->
+        <div class="header-contact-info" id="headerContactInfo">
+          <i class="fa-brands fa-whatsapp contact-icon-wa"></i>
+          <div class="contact-details">
+            <span class="contact-label">Pedir agora:</span>
+            <a href="https://wa.me/5512999999999" target="_blank" class="contact-number" id="headerWaLink">(12) 99999-9999</a>
+          </div>
+        </div>
+
+        <!-- Área do Usuário (Entrar / Cadastrar) -->
+        <div class="user-menu-wrapper" id="userMenuWrapper">
+          <button class="user-menu-btn" id="userMenuBtn" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-regular fa-user user-icon"></i>
+            <div class="user-text-info">
+              <span class="user-welcome" id="userWelcomeText">Entrar</span>
+              <span class="user-action-prompt" id="userActionPrompt">Minha Conta</span>
+            </div>
+          </button>
+          
+          <!-- Dropdown do Usuário -->
+          <div class="user-dropdown" id="userDropdown">
+            <div class="dropdown-content-logged-out" id="dropdownLoggedOut">
+              <p class="dropdown-text">Aproveite descontos exclusivos!</p>
+              <button class="btn btn-primary btn-block" id="dropdownLoginBtn">Entrar</button>
+              <button class="btn btn-secondary btn-block" id="dropdownRegisterBtn">Criar Conta</button>
+            </div>
+            <div class="dropdown-content-logged-in hidden" id="dropdownLoggedIn">
+              <p class="dropdown-text">Olá, <strong id="loggedUserName">Cliente</strong>!</p>
+              <p class="dropdown-pet-text"><i class="fa-solid fa-heart"></i> Pet cadastrado: <span id="loggedUserPet">Nenhum</span></p>
+              <hr class="dropdown-divider">
+              <button class="btn btn-secondary btn-block" id="btnAppDownloadRedirect">Meu Aplicativo</button>
+              <button class="btn btn-danger btn-block" id="dropdownLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sacola de Compras (Carrinho) -->
+        <button class="cart-trigger" id="cartTriggerBtn" aria-label="Abrir sacola de compras">
+          <div class="cart-icon-wrapper">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span class="cart-counter" id="cartCounter">0</span>
+          </div>
+          <div class="cart-text-info">
+            <span class="cart-label">Minha Sacola</span>
+            <span class="cart-total-value" id="cartTotalValHeader">R$ 0,00</span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Seção Hero (Mascote Théo em Destaque) -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-container">
+        <div class="hero-text-content">
+          <span class="badge badge-hero"><i class="fa-solid fa-award"></i> O Diretor de Qualidade Aprova!</span>
+          <h1 class="hero-title">Tudo o que seu pet ama com o preço que você adora!</h1>
+          <p class="hero-subtitle">
+            Conheça a **Théo Dog Rações**, fundada sob a supervisão do nosso mascote **Théo** (esse cãozinho simpático ao lado!). 
+            Compre online, ganhe descontos no cadastro e finalize seu pedido diretamente no WhatsApp para entrega em Jacareí e região.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#catalogSection" class="btn btn-primary btn-lg" id="heroCtaCatalog"><i class="fa-solid fa-store"></i> Ver Produtos</a>
+            <button class="btn btn-accent btn-lg" id="heroCtaApp"><i class="fa-solid fa-mobile-screen-button"></i> Baixar o Aplicativo</button>
+          </div>
+          <div class="hero-features">
+            <div class="feature-item">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Entrega Rápida</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-percent"></i>
+              <span>Desconto no Pix</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-headset"></i>
+              <span>Atendimento 5 Estrelas</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Foto do Mascote Théo -->
+        <div class="hero-image-wrapper">
+          <div class="mascot-card">
+            <div class="mascot-img-container">
+              <img src="assets/img/theo_mascote1.jpg" alt="Théo, o cachorro propaganda e diretor de qualidade da Théo Dog Rações" id="mascotHeroImage">
+            </div>
+            <div class="mascot-info-tag">
+              <div class="mascot-tag-header">
+                <h3>Théo</h3>
+                <span class="status-badge">Online</span>
+              </div>
+              <p>🐾 "Se eu deitei em cima da ração, é porque é de qualidade premium!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navegação de Categorias Rápidas -->
+    <section class="categories-section" id="categoriesSection">
+      <div class="section-container">
+        <h2 class="section-title text-center">Navegue por Categoria</h2>
+        <div class="categories-grid" id="categoriesGrid">
+          
+          <button class="category-card active" data-category="todos" id="catBtnTodos">
+            <div class="category-icon-bg"><i class="fa-solid fa-border-all"></i></div>
+            <span>Todos</span>
+          </button>
+          
+          <button class="category-card" data-category="cachorro" id="catBtnCachorro">
+            <div class="category-icon-bg"><i class="fa-solid fa-dog"></i></div>
+            <span>Cachorros</span>
+          </button>
+          
+          <button class="category-card" data-category="gato" id="catBtnGato">
+            <div class="category-icon-bg"><i class="fa-solid fa-cat"></i></div>
+            <span>Gatos</span>
+          </button>
+          
+          <button class="category-card" data-category="passaros" id="catBtnPassaros">
+            <div class="category-icon-bg"><i class="fa-solid fa-dove"></i></div>
+            <span>Pássaros</span>
+          </button>
+          
+          <button class="category-card" data-category="acessorios" id="catBtnAcessorios">
+            <div class="category-icon-bg"><i class="fa-solid fa-bone"></i></div>
+            <span>Acessórios</span>
+          </button>
+          
+          <button class="category-card" data-category="farmacia" id="catBtnFarmacia">
+            <div class="category-icon-bg"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+            <span>Farmácia</span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo de Produtos -->
+    <section class="catalog-section" id="catalogSection">
+      <div class="section-container">
+        <div class="catalog-header">
+          <div class="catalog-title-area">
+            <h2 class="section-title" id="catalogTitle">Nossos Produtos em Destaque</h2>
+            <p class="section-subtitle" id="catalogSubtitle">Encontre as melhores rações e mimos para seu pet.</p>
+          </div>
+          
+          <!-- Filtro / Ordenação -->
+          <div class="catalog-filters">
+            <label for="sortSelect" class="filter-label">Ordenar por:</label>
+            <select id="sortSelect" class="sort-select">
+              <option value="default">Relevância</option>
+              <option value="price-asc">Menor Preço</option>
+              <option value="price-desc">Maior Preço</option>
+              <option value="name-asc">Nome (A - Z)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Mensagem de carregamento/erro ou filtro vazio -->
+        <div class="no-results hidden" id="noResultsMessage">
+          <i class="fa-solid fa-paw icon-no-results"></i>
+          <h3>Ops! Nenhum produto encontrado...</h3>
+          <p>Tente buscar por termos diferentes ou limpe os filtros.</p>
+          <button class="btn btn-secondary" id="clearFiltersBtn">Ver Todos os Produtos</button>
+        </div>
+
+        <!-- Grade de Produtos -->
+        <div class="products-grid" id="productsGrid">
+          <!-- Produtos serão inseridos via Javascript dinamicamente -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Banner Promocional / Cadastro -->
+    <section class="banner-cta-section" id="bannerCtaSection">
+      <div class="cta-container">
+        <div class="cta-text">
+          <h2>Ganhe 10% de Desconto na primeira compra!</h2>
+          <p>Faça seu cadastro agora mesmo em nosso site e garanta 10% OFF no seu primeiro pedido de ração.</p>
+          <button class="btn btn-accent btn-lg" id="ctaRegisterBtn"><i class="fa-solid fa-user-plus"></i> Fazer Cadastro Grátis</button>
+        </div>
+        <div class="cta-decorations">
+          <i class="fa-solid fa-heart cta-heart-1"></i>
+          <i class="fa-solid fa-star cta-star-1"></i>
+          <i class="fa-solid fa-bone cta-bone-1"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção do Aplicativo da Loja -->
+    <section class="app-section" id="appSection">
+      <div class="app-container">
+        <div class="app-image-side">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-header">
+                <i class="fa-solid fa-wifi"></i>
+                <span>10:00</span>
+                <i class="fa-solid fa-battery-full"></i>
+              </div>
+              <div class="phone-app-content">
+                <div class="phone-app-logo">
+                  <i class="fa-solid fa-dog"></i>
+                  <span>Théo Dog App</span>
+                </div>
+                <img src="assets/img/theo_mascote2.jpg" alt="Théo posando no App" class="phone-mascot-pic">
+                <div class="phone-promo-bubble">
+                  <span>cupom:</span>
+                  <strong>THEO10</strong>
+                </div>
+              </div>
+            </div>
+            <!-- Botão Home do celular -->
+            <div class="phone-home-btn"></div>
+          </div>
+        </div>
+        
+        <div class="app-text-side">
+          <span class="badge badge-accent"><i class="fa-solid fa-mobile-screen"></i> Exclusivo Théo Dog</span>
+          <h2>Baixe nosso Aplicativo e compre em 1 clique!</h2>
+          <p>
+            Com o aplicativo da **Théo Dog Rações**, você recebe notificações de promoções relâmpago, acumula pontos de fidelidade que viram descontos, e programa a entrega automática da ração do seu pet todo mês.
+          </p>
+          <div class="app-benefits">
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="fa-solid fa-shield-cat"></i></div>
+              <div class="benefit-text">
+                <h3>Clube de Pontos</h3>
+                <p>Cada compra acumula pontos para trocar por brindes ou descontos.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+              <div class="benefit-text">
+                <h3>Compra Recorrente</h3>
+                <p>Programe a ração mensal e nunca mais se preocupe em ficar sem.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="app-download-buttons">
+            <button class="btn btn-primary btn-download" id="btnDownloadAndroid" aria-label="Baixar aplicativo para Android">
+              <i class="fa-brands fa-android icon-download"></i>
+              <div class="download-btn-text">
+                <span>Disponível para</span>
+                <strong>Android (APK)</strong>
+              </div>
+            </button>
+            <button class="btn btn-primary btn-download" id="btnDownloadIos" aria-label="Baixar aplicativo para iOS">
+              <i class="fa-brands fa-apple icon-download"></i>
+              <div class="download-btn-text">
+                <span>Disponível para</span>
+                <strong>iPhone (PWA)</strong>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé da Página (Footer) -->
+  <footer class="main-footer" id="mainFooter">
+    <div class="footer-top">
+      <div class="footer-container">
+        
+        <!-- Info da Loja -->
+        <div class="footer-info-col">
+          <div class="footer-logo">
+            <i class="fa-solid fa-dog"></i>
+            <span>THÉO DOG RAÇÕES</span>
+          </div>
+          <p class="footer-description">
+            Qualidade, preço baixo e o carinho que seu pet merece. Entregas rápidas em Jacareí - SP.
+          </p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/theodogracoes" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com/theodogracoes" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://wa.me/5512999999999" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Links Rápidos -->
+        <div class="footer-links-col">
+          <h3>Links Úteis</h3>
+          <ul>
+            <li><a href="#catalogSection">Rações para Cães</a></li>
+            <li><a href="#catalogSection">Rações para Gatos</a></li>
+            <li><a href="#catalogSection">Medicamentos</a></li>
+            <li><a href="#appSection">Baixar Aplicativo</a></li>
+            <li><a href="#" id="footerLinkRegister">Fazer Cadastro</a></li>
+          </ul>
+        </div>
+
+        <!-- Atendimento e Endereço -->
+        <div class="footer-contact-col">
+          <h3>Atendimento & Endereço</h3>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Jacareí - SP (Consulte bairros atendidos)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <span>(12) 99999-9999</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span>Seg. a Sáb.: 08:00 às 18:00</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>contato@theodogracoes.com.br</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Direitos Autorais -->
+    <div class="footer-bottom">
+      <div class="footer-container bottom-flex">
+        <p>&copy; 2026 THÉO DOG RAÇÕES. Todos os direitos reservados. Jacareí - SP.</p>
+        <div class="payment-methods">
+          <i class="fa-brands fa-pix" title="Pix"></i>
+          <i class="fa-solid fa-credit-card" title="Cartão de Crédito/Débito"></i>
+          <i class="fa-solid fa-money-bill-1-wave" title="Dinheiro no ato da entrega"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante do WhatsApp -->
+  <a href="https://wa.me/5512999999999?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20as%20ra%C3%A7%C3%B5es." target="_blank" class="whatsapp-floating" id="whatsappFloatingBtn" aria-label="Falar conosco no WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="floating-tooltip">Dúvidas? Fale conosco!</span>
+  </a>
+
+  <!-- ================= MODAIS & ELEMENTOS OVERLAY ================= -->
+
+  <!-- Drawer da Sacola de Compras (Sidebar Direito) -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-labelledby="cartDrawerTitle">
+    <div class="cart-drawer-header">
+      <h2 id="cartDrawerTitle"><i class="fa-solid fa-basket-shopping"></i> Sua Sacola</h2>
+      <button class="close-drawer-btn" id="closeCartBtn" aria-label="Fechar sacola">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div class="cart-drawer-body" id="cartDrawerBody">
+      <!-- Mensagem quando o carrinho está vazio -->
+      <div class="cart-empty-state" id="cartEmptyState">
+        <i class="fa-solid fa-paw icon-empty-cart"></i>
+        <p>Sua sacola está vazia.</p>
+        <button class="btn btn-primary" id="btnBackToShop">Escolher Produtos</button>
+      </div>
+
+      <!-- Lista de itens do carrinho -->
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Itens injetados via JS -->
+      </div>
+    </div>
+
+    <!-- Rodapé do Carrinho (Resumo e Finalização) -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-summary-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotalVal">R$ 0,00</strong>
+      </div>
+      <div class="cart-summary-row promo-discount hidden" id="cartDiscountRow">
+        <span>Desconto de Cadastro (10%):</span>
+        <strong id="cartDiscountVal">- R$ 0,00</strong>
+      </div>
+      <div class="cart-summary-row cart-total">
+        <span>Total:</span>
+        <strong id="cartTotalVal">R$ 0,00</strong>
+      </div>
+
+      <!-- Formulário de Observações e Informações do Cliente -->
+      <div class="cart-delivery-form">
+        <h3>Informações para Entrega</h3>
+        <div class="form-group-compact">
+          <input type="text" id="cartDeliveryAddress" placeholder="Endereço Completo em Jacareí" required>
+        </div>
+        <div class="form-group-compact">
+          <select id="cartPaymentMethod">
+            <option value="Pix">Pagamento: Pix (10% OFF na ração)</option>
+            <option value="Cartão de Crédito">Pagamento: Cartão de Crédito (na entrega)</option>
+            <option value="Cartão de Débito">Pagamento: Cartão de Débito (na entrega)</option>
+            <option value="Dinheiro">Pagamento: Dinheiro (na entrega)</option>
+          </select>
+        </div>
+        <div class="form-group-compact">
+          <textarea id="cartNotes" placeholder="Observações (ex: Troco para R$ 100, deixar na portaria, etc.)" rows="2"></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block btn-checkout-wa" id="btnCheckoutWhatsApp">
+        <i class="fa-brands fa-whatsapp"></i> Finalizar Pedido via WhatsApp
+      </button>
+      <p class="checkout-disclaimer">Você será redirecionado para o WhatsApp para confirmar seu pedido.</p>
+    </div>
+  </aside>
+
+  <!-- Modal de Cadastro / Login -->
+  <div class="modal-overlay" id="authModalOverlay">
+    <div class="modal-card auth-modal" id="authModal">
+      <button class="close-modal-btn" id="closeAuthModalBtn" aria-label="Fechar modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Tabs de Seleção Login / Cadastro -->
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tabLoginBtn">Entrar</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn">Criar Conta</button>
+      </div>
+
+      <!-- Formulário de Login -->
+      <div class="auth-form-container" id="loginFormContainer">
+        <form id="loginForm">
+          <h2 class="auth-title">Bem-vindo de volta!</h2>
+          <p class="auth-subtitle">Acesse sua conta para ver seus cupons e agilizar seus pedidos.</p>
+          
+          <div class="form-group">
+            <label for="loginEmail">E-mail</label>
+            <div class="input-with-icon">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="seuemail@exemplo.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Senha</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="Digite sua senha" required autocomplete="current-password">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btnLoginSubmit">Entrar na Conta</button>
+        </form>
+      </div>
+
+      <!-- Formulário de Cadastro -->
+      <div class="auth-form-container hidden" id="registerFormContainer">
+        <form id="registerForm">
+          <h2 class="auth-title">Crie sua Conta Grátis</h2>
+          <p class="auth-subtitle">Cadastre-se para ganhar 10% de desconto no seu primeiro pedido de ração.</p>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="regName">Nome Completo</label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="regName" placeholder="Seu nome" required autocomplete="name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regPhone">WhatsApp / Celular</label>
+              <div class="input-with-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+                <input type="tel" id="regPhone" placeholder="(12) 99999-9999" required autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail">E-mail</label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" id="regEmail" placeholder="seuemail@exemplo.com" required autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regPassword">Senha</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required autocomplete="new-password">
+              </div>
+            </div>
+
+            <!-- Dados do Pet (Engajamento) -->
+            <div class="form-group">
+              <label for="regPetName">Nome do seu Pet</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-paw"></i>
+                <input type="text" id="regPetName" placeholder="Ex: Bob, Mel" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regPetType">Tipo de Pet</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-circle-info"></i>
+                <select id="regPetType" required>
+                  <option value="" disabled selected>Selecione...</option>
+                  <option value="Cachorro">Cachorro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Pássaro">Pássaro</option>
+                  <option value="Outro">Outros</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-checkbox-group">
+            <input type="checkbox" id="regPromoAccept" checked>
+            <label for="regPromoAccept">Aceito receber ofertas exclusivas da Théo Dog no meu WhatsApp</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btnRegisterSubmit">Cadastrar e Ganhar 10% OFF</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de Download / Instalação do App (Feedback de Sucesso) -->
+  <div class="modal-overlay" id="appModalOverlay">
+    <div class="modal-card app-install-modal" id="appInstallModal">
+      <button class="close-modal-btn" id="closeAppModalBtn" aria-label="Fechar modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="app-install-content" id="appInstallLoading">
+        <div class="app-logo-spinning">
+          <i class="fa-solid fa-dog icon-spinning-dog"></i>
+        </div>
+        <h2 id="installModalTitle">Baixando Théo Dog App...</h2>
+        <p>Preparando a instalação segura do seu aplicativo da loja no seu dispositivo.</p>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+        <span class="progress-pct" id="progressPctText">0%</span>
+      </div>
+
+      <div class="app-install-content hidden" id="appInstallSuccess">
+        <div class="success-icon-badge">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2>Instalado com Sucesso!</h2>
+        <p>O aplicativo **Théo Dog Rações** já está disponível na tela inicial do seu aparelho.</p>
+        <div class="coupon-box">
+          <span class="coupon-label">Seu Cupom de Boas-Vindas:</span>
+          <strong class="coupon-code">THEO10</strong>
+          <p class="coupon-sub">Use este cupom para ganhar 10% de desconto na primeira compra via WhatsApp!</p>
+        </div>
+        <button class="btn btn-primary btn-block" id="btnDismissAppModal">Começar a Usar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
