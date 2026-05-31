@@ -22,7 +22,8 @@ const PRODUCTS_DB = [
     isBestSeller: true,
     isNew: false,
     icon: "fa-solid fa-bone",
-    color: "#ffc107" // Amarelo
+    color: "#ffc107", // Amarelo
+    image: "assets/img/racao_cao_premium.png"
   },
   {
     id: 2,
@@ -35,7 +36,8 @@ const PRODUCTS_DB = [
     isBestSeller: true,
     isNew: false,
     icon: "fa-solid fa-fish",
-    color: "#20c997" // Verde-água
+    color: "#20c997", // Verde-água
+    image: "assets/img/racao_gato_premium.png"
   },
   {
     id: 3,
@@ -48,7 +50,8 @@ const PRODUCTS_DB = [
     isBestSeller: false,
     isNew: false,
     icon: "fa-solid fa-dog",
-    color: "#0d6efd" // Azul
+    color: "#0d6efd", // Azul
+    image: "assets/img/racao_cao_premium.png"
   },
   {
     id: 4,
@@ -61,7 +64,8 @@ const PRODUCTS_DB = [
     isBestSeller: false,
     isNew: true,
     icon: "fa-solid fa-dove",
-    color: "#fd7e14" // Laranja
+    color: "#fd7e14", // Laranja
+    image: "assets/img/racao_passaro_premium.png"
   },
   {
     id: 5,
@@ -113,7 +117,8 @@ const PRODUCTS_DB = [
     isBestSeller: true,
     isNew: false,
     icon: "fa-solid fa-pills",
-    color: "#dc3545" // Vermelho
+    color: "#dc3545", // Vermelho
+    image: "assets/img/antipulgas_caixa.png"
   },
   {
     id: 9,
@@ -165,7 +170,8 @@ const PRODUCTS_DB = [
     isBestSeller: false,
     isNew: false,
     icon: "fa-solid fa-dove",
-    color: "#fd7e14" // Laranja
+    color: "#fd7e14", // Laranja
+    image: "assets/img/racao_passaro_premium.png"
   }
 ];
 
@@ -355,8 +361,10 @@ function renderCatalog() {
       badgesHtml += `<span class="prod-badge prod-badge-featured" style="background-color: var(--success)">Novo</span>`;
     }
 
-    // Criar uma representação visual elegante em SVG baseada na categoria do produto
-    const svgIcon = `<i class="${product.icon} product-placeholder-icon" style="color: ${product.color}"></i>`;
+    // Criar uma representação visual elegante (Imagem ou ícone fallback) baseada no produto
+    const productMediaHtml = product.image 
+      ? `<img src="${product.image}" alt="${product.name}" class="product-card-image" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: var(--radius-sm);">`
+      : `<i class="${product.icon} product-placeholder-icon" style="color: ${product.color}"></i>`;
 
     // Desenhar estrelas
     let starsHtml = "";
@@ -374,8 +382,8 @@ function renderCatalog() {
     card.innerHTML = `
       <div class="product-badges">${badgesHtml}</div>
       <div class="product-img-wrapper">
-        <div class="product-category-graphic" style="background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(241,245,249,0.5) 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-          ${svgIcon}
+        <div class="product-category-graphic" style="background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(241,245,249,0.5) 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 12px;">
+          ${productMediaHtml}
         </div>
       </div>
       <span class="product-category">${product.category}</span>
@@ -454,6 +462,7 @@ window.addToCart = function(productId) {
       price: product.price,
       icon: product.icon,
       color: product.color,
+      image: product.image || "",
       quantity: 1
     });
   }
@@ -500,11 +509,15 @@ function updateCartUI() {
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
+    const itemMediaHtml = item.image 
+      ? `<img src="${item.image}" alt="${item.name}" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: var(--radius-sm);">`
+      : `<i class="${item.icon}" style="color: ${item.color}; font-size: 1.5rem;"></i>`;
+
     const itemRow = document.createElement("div");
     itemRow.className = "cart-item";
     itemRow.innerHTML = `
       <div class="cart-item-img">
-        <i class="${item.icon}" style="color: ${item.color}; font-size: 1.5rem;"></i>
+        ${itemMediaHtml}
       </div>
       <div class="cart-item-details">
         <h4 class="cart-item-name">${item.name}</h4>
